@@ -17,4 +17,14 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# Set working directory to Laravel's root directory
+WORKDIR /var/www/html
+
+# Install composer dependencies (assuming you have a composer.json file)
+RUN composer global require hirak/prestissimo
+RUN composer install --no-dev
+
+# Expose port 80 for the web server
+EXPOSE 80
+
 CMD ["/start.sh"]
